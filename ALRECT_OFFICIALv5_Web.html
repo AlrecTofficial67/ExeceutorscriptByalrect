@@ -1,0 +1,2562 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alrect Scripter Official</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000000;
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: white;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(ellipse at center, #1a0f2e 0%, #000000 70%);
+        }
+
+        .jupiter-container {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        .jupiter {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, 
+                #c88b3a 0%, 
+                #d4a574 15%, 
+                #8b6239 30%, 
+                #c88b3a 45%, 
+                #f4d4a8 60%, 
+                #c88b3a 75%, 
+                #8b6239 90%);
+            box-shadow: 
+                0 0 100px rgba(200, 139, 58, 0.6),
+                inset -30px -30px 60px rgba(0, 0, 0, 0.5),
+                inset 20px 20px 40px rgba(255, 255, 255, 0.1);
+            position: relative;
+            animation: jupiterRotate 60s linear infinite;
+        }
+
+        .jupiter::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 30%;
+            top: 40%;
+            left: 0;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(139, 98, 57, 0.4) 20%, 
+                rgba(139, 98, 57, 0.6) 50%, 
+                rgba(139, 98, 57, 0.4) 80%, 
+                transparent 100%);
+            border-radius: 50%;
+        }
+
+        .great-red-spot {
+            position: absolute;
+            width: 80px;
+            height: 50px;
+            background: radial-gradient(ellipse, #d4735e 0%, #8b4234 70%);
+            border-radius: 50%;
+            top: 45%;
+            left: 30%;
+            box-shadow: inset -5px -5px 10px rgba(0, 0, 0, 0.4);
+            animation: spotPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes jupiterRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes spotPulse {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        .orbit {
+            position: absolute;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .orbit-1 {
+            width: 550px;
+            height: 550px;
+        }
+
+        .orbit-2 {
+            width: 700px;
+            height: 700px;
+        }
+
+        .moon {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle at 30% 30%, #ffffff, #b0b0b0);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            top: 50%;
+            left: 50%;
+        }
+
+        .moon-1 {
+            animation: orbit1 15s linear infinite;
+        }
+
+        .moon-2 {
+            width: 25px;
+            height: 25px;
+            background: radial-gradient(circle at 30% 30%, #ffe4b5, #daa520);
+            animation: orbit2 25s linear infinite;
+        }
+
+        .moon-3 {
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle at 30% 30%, #e6e6fa, #9370db);
+            animation: orbit1 20s linear infinite reverse;
+        }
+
+        .moon-4 {
+            width: 22px;
+            height: 22px;
+            background: radial-gradient(circle at 30% 30%, #f0e68c, #bdb76b);
+            animation: orbit2 18s linear infinite reverse;
+        }
+
+        @keyframes orbit1 {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg) translateX(275px) rotate(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(360deg) translateX(275px) rotate(-360deg);
+            }
+        }
+
+        @keyframes orbit2 {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg) translateX(350px) rotate(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(360deg) translateX(350px) rotate(-360deg);
+            }
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .content-overlay {
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(200, 139, 58, 0.8), 0 0 40px rgba(200, 139, 58, 0.4);
+            animation: fadeInDown 1s ease;
+            color: #f4d4a8;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            text-shadow: 0 0 10px rgba(200, 139, 58, 0.5);
+            animation: fadeInUp 1s ease;
+            color: #d4a574;
+            margin-bottom: 15px;
+        }
+
+        .owner-tag {
+            font-size: 1rem;
+            color: #c88b3a;
+            text-shadow: 0 0 10px rgba(200, 139, 58, 0.8);
+            animation: fadeInUp 1.2s ease;
+            margin-top: 10px;
+            padding: 8px 20px;
+            background: rgba(200, 139, 58, 0.1);
+            border: 2px solid rgba(200, 139, 58, 0.3);
+            border-radius: 25px;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            padding: 8px 16px;
+            background: rgba(200, 139, 58, 0.2);
+            border: 2px solid rgba(200, 139, 58, 0.3);
+            color: #f4d4a8;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-btn:hover {
+            background: rgba(200, 139, 58, 0.4);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(200, 139, 58, 0.5);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .lang-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .lang-btn {
+            background: rgba(200, 139, 58, 0.2);
+            border: 2px solid #c88b3a;
+            color: #f4d4a8;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .lang-btn:hover {
+            background: rgba(200, 139, 58, 0.4);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(200, 139, 58, 0.5);
+        }
+
+        .scripts-section {
+            padding: 60px 20px;
+            background: linear-gradient(180deg, #000000 0%, #1a0f2e 50%, #000000 100%);
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .search-container {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .search-input {
+            background: rgba(26, 15, 46, 0.8);
+            border: 2px solid rgba(200, 139, 58, 0.3);
+            border-radius: 25px;
+            padding: 12px 20px;
+            width: 80%;
+            max-width: 600px;
+            color: #f4d4a8;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: rgba(200, 139, 58, 0.6);
+            box-shadow: 0 0 15px rgba(200, 139, 58, 0.4);
+        }
+
+        .script-card {
+            background: rgba(26, 15, 46, 0.8);
+            border: 2px solid rgba(200, 139, 58, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(200, 139, 58, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .script-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(200, 139, 58, 0.4);
+            border-color: rgba(200, 139, 58, 0.6);
+        }
+
+        .script-card.hidden {
+            display: none;
+        }
+
+        .script-title {
+            color: #f4d4a8;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(200, 139, 58, 0.5);
+        }
+
+        .script-features {
+            color: #d4a574;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .script-features ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        .script-code {
+            background: #0a0a0a;
+            color: #c88b3a;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 15px 0;
+            position: relative;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            border: 1px solid rgba(200, 139, 58, 0.2);
+        }
+
+        .version-selector {
+            margin: 15px 0;
+        }
+
+        .version-btn {
+            background: rgba(200, 139, 58, 0.3);
+            color: #f4d4a8;
+            border: 2px solid rgba(200, 139, 58, 0.5);
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .version-btn:hover {
+            background: rgba(200, 139, 58, 0.5);
+            transform: scale(1.05);
+        }
+
+        .version-btn.active {
+            background: rgba(200, 139, 58, 0.6);
+            box-shadow: 0 5px 15px rgba(200, 139, 58, 0.4);
+            border-color: #c88b3a;
+        }
+
+        .copy-btn {
+            background: linear-gradient(135deg, #c88b3a 0%, #8b6239 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 5px 15px rgba(200, 139, 58, 0.3);
+        }
+
+        .copy-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(200, 139, 58, 0.6);
+        }
+
+        .copy-btn:active {
+            transform: scale(0.98);
+        }
+
+        .copy-btn.copied {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+        }
+
+        .request-btn {
+            background: linear-gradient(135deg, #c88b3a 0%, #8b6239 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 5px 15px rgba(200, 139, 58, 0.3);
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .request-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(200, 139, 58, 0.6);
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(200, 139, 58, 0.3);
+            color: #f4d4a8;
+            border: 2px solid rgba(200, 139, 58, 0.5);
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .tab-btn:hover {
+            background: rgba(200, 139, 58, 0.5);
+            transform: scale(1.05);
+        }
+
+        .tab-btn.active {
+            background: rgba(200, 139, 58, 0.6);
+            box-shadow: 0 5px 15px rgba(200, 139, 58, 0.4);
+            border-color: #c88b3a;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Styles for Download TikTok */
+        .download-container {
+            max-width: 800px;
+            margin: auto;
+            background: rgba(26, 15, 46, 0.8);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(200, 139, 58, 0.2);
+            border: 2px solid rgba(200, 139, 58, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .download-container h1 {
+            text-align: center;
+            color: #f4d4a8;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(200, 139, 58, 0.5);
+        }
+
+        .download-container p {
+            color: #d4a574;
+            margin-bottom: 15px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        #video-link {
+            flex: 1;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid rgba(200, 139, 58, 0.2);
+            border-radius: 4px;
+            min-width: 300px;
+            background: #0a0a0a;
+            color: #c88b3a;
+        }
+
+        .download-btn {
+            padding: 12px 20px;
+            margin-left: 5px;
+            background: linear-gradient(135deg, #c88b3a 0%, #8b6239 100%);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(200, 139, 58, 0.3);
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(200, 139, 58, 0.6);
+        }
+
+        .download {
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+            background: linear-gradient(135deg, #c88b3a 0%, #8b6239 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(200, 139, 58, 0.3);
+        }
+
+        .download:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(200, 139, 58, 0.6);
+        }
+
+        #js-result {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .download-link {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #c88b3a 0%, #8b6239 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(200, 139, 58, 0.3);
+        }
+
+        .download-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(200, 139, 58, 0.6);
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+
+        .progress {
+            margin-top: 10px;
+            font-style: italic;
+            color: #d4a574;
+        }
+
+        video {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+            border: 1px solid rgba(200, 139, 58, 0.2);
+            border-radius: 4px;
+        }
+
+        .back-btn {
+            background: rgba(200, 139, 58, 0.3);
+            color: #f4d4a8;
+            border: 2px solid rgba(200, 139, 58, 0.5);
+            padding: 10px 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            display: block;
+            text-align: center;
+        }
+
+        .back-btn:hover {
+            background: rgba(200, 139, 58, 0.5);
+            transform: scale(1.05);
+        }
+
+        /* Styles for Minify/Beautify */
+        .minify-container {
+            max-width: 1200px;
+            margin: auto;
+            background: rgba(26, 15, 46, 0.8);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(200, 139, 58, 0.2);
+            border: 2px solid rgba(200, 139, 58, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .minify-container h1 {
+            text-align: center;
+            color: #f4d4a8;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(200, 139, 58, 0.5);
+        }
+
+        .minify-container p {
+            color: #d4a574;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .minify-input-group, .minify-output-group {
+            margin-bottom: 20px;
+        }
+
+        .minify-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #f4d4a8;
+        }
+
+        .minify-textarea {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            border: 1px solid rgba(200, 139, 58, 0.2);
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            background: #0a0a0a;
+            color: #c88b3a;
+            resize: vertical;
+        }
+
+        .minify-file-input {
+            margin-bottom: 10px;
+            width: 100%;
+            padding: 10px;
+            background: #0a0a0a;
+            color: #c88b3a;
+            border: 1px solid rgba(200, 139, 58, 0.2);
+            border-radius: 4px;
+        }
+
+        .minify-btn {
+            background: linear-gradient(135deg, #c88b3a 0%, #8b6239 100%);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(200, 139, 58, 0.3);
+        }
+
+        .minify-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(200, 139, 58, 0.6);
+        }
+
+        .minify-btn.beautify {
+            background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
+        }
+
+        .minify-btn.beautify:hover {
+            background: linear-gradient(135deg, #7B1FA2 0%, #6A1B9A 100%);
+        }
+
+        .minify-btn.copy {
+            background: linear-gradient(135deg, #2196F3 0%, #0b7dda 100%);
+        }
+
+        .minify-btn.copy:hover {
+            background: linear-gradient(135deg, #0b7dda 0%, #0a68c0 100%);
+        }
+
+        .minify-btn.download {
+            background: linear-gradient(135deg, #FF9800 0%, #e68900 100%);
+        }
+
+        .minify-btn.download:hover {
+            background: linear-gradient(135deg, #e68900 0%, #d97a00 100%);
+        }
+
+        .minify-button-group {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .minify-warning {
+            color: #ff9800;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .minify-action-buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .minify-output {
+            background: #0a0a0a;
+            color: #c88b3a;
+        }
+
+        /* Styles for Executor Tab - Updated with more cards */
+        .executor-section {
+            padding: 40px 0;
+        }
+
+        .platform-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .platform-icon {
+            font-size: 2rem;
+            color: #c88b3a;
+        }
+
+        .platform-title {
+            color: #f4d4a8;
+            font-size: 2rem;
+            text-shadow: 0 0 10px rgba(200, 139, 58, 0.5);
+        }
+
+        .platform-desc {
+            color: #d4a574;
+            font-size: 1.1rem;
+        }
+
+        .platform-badge {
+            background: rgba(200, 139, 58, 0.2);
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(200, 139, 58, 0.3);
+        }
+
+        .executor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .executor-card {
+            background: rgba(26, 15, 46, 0.8);
+            border: 2px solid rgba(200, 139, 58, 0.3);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 40px rgba(200, 139, 58, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .executor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(200, 139, 58, 0.4);
+            border-color: rgba(200, 139, 58, 0.6);
+        }
+
+        .executor-card.featured {
+            border-color: #c88b3a;
+        }
+
+        .executor-name {
+            color: #f4d4a8;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            color: #d4a574;
+        }
+
+        .status-online {
+            color: #48bb78;
+        }
+
+        .status-offline {
+            color: #e53e3e;
+        }
+
+        .executor-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .executor-download {
+            background: linear-gradient(135deg, #c88b3a 0%, #8b6239 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 5px 15px rgba(200, 139, 58, 0.3);
+        }
+
+        .executor-download:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(200, 139, 58, 0.6);
+        }
+
+        .executor-download.disabled {
+            background: rgba(200, 139, 58, 0.3);
+            cursor: not-allowed;
+        }
+
+        .executor-premium {
+            background: linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%);
+        }
+
+        .executor-discord {
+            background: #5865F2;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        .executor-discord:hover {
+            transform: scale(1.05);
+        }
+
+        .stars-rating {
+            color: #f4d4a8;
+            display: flex;
+            gap: 2px;
+            margin-bottom: 5px;
+        }
+
+        .stars-rating i {
+            color: #f4d4a8;
+        }
+
+        @media (max-width: 768px) {
+            .jupiter-container {
+                width: 250px;
+                height: 250px;
+            }
+
+            .orbit-1 {
+                width: 350px;
+                height: 350px;
+            }
+
+            .orbit-2 {
+                width: 450px;
+                height: 450px;
+            }
+
+            @keyframes orbit1 {
+                from {
+                    transform: translate(-50%, -50%) rotate(0deg) translateX(175px) rotate(0deg);
+                }
+                to {
+                    transform: translate(-50%, -50%) rotate(360deg) translateX(175px) rotate(-360deg);
+                }
+            }
+
+            @keyframes orbit2 {
+                from {
+                    transform: translate(-50%, -50%) rotate(0deg) translateX(225px) rotate(0deg);
+                }
+                to {
+                    transform: translate(-50%, -50%) rotate(360deg) translateX(225px) rotate(-360deg);
+                }
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .script-title {
+                font-size: 1.3rem;
+            }
+
+            .script-code {
+                font-size: 0.8rem;
+            }
+
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .executor-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .platform-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .executor-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="lang-toggle">
+        <button class="lang-btn" onclick="toggleLanguage()">
+            <span id="langText">English</span>
+        </button>
+    </div>
+
+    <div class="hero">
+        <div class="stars" id="starsContainer"></div>
+        
+        <div class="jupiter-container">
+            <div class="jupiter">
+                <div class="great-red-spot"></div>
+            </div>
+            <div class="orbit orbit-1">
+                <div class="moon moon-1"></div>
+                <div class="moon moon-3"></div>
+            </div>
+            <div class="orbit orbit-2">
+                <div class="moon moon-2"></div>
+                <div class="moon moon-4"></div>
+            </div>
+        </div>
+
+        <div class="content-overlay">
+            <h1 id="mainTitle">Web Resmi Alrect Scripter</h1>
+            <p id="mainSubtitle">Pake script yang baik, jangan ngerugiin orang lain</p>
+            <div class="owner-tag">
+                👑 <span id="ownerLabel">Owner:</span> G0DST3R_ALIP
+            </div>
+            <div class="social-links">
+                <a href="https://www.scriptblox.com/u/XPLOITFORCE_ALIP" target="_blank" class="social-btn" id="scriptbloxBtn">Scriptblox</a>
+                <a href="https://wa.me/6281234567890" target="_blank" class="social-btn" id="whatsappBtn">WhatsApp</a>
+                <a href="https://www.scriptblox.com/u/XPLOITFORCE_ALIP" target="_blank" class="social-btn" id="channelBtn">Masuk Saluran Alrect</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="scripts-section">
+        <div class="container">
+            <div class="tabs">
+                <button class="tab-btn active" onclick="showTab('scripts')" id="scriptsTabBtn">Scripts Roblox</button>
+                <button class="tab-btn" onclick="showTab('download')" id="downloadTabBtn">Fitur Download TikTok Video</button>
+                <button class="tab-btn" onclick="showTab('minify')" id="minifyTabBtn">Minify/Beautify</button>
+                <button class="tab-btn" onclick="showTab('executor')" id="executorTabBtn">Executor</button>
+            </div>
+
+            <div id="scripts-tab" class="tab-content active">
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Cari script atau fitur...">
+                </div>
+
+                <div class="script-card" data-features="skybox anti afz detect copy avatar player fling sound fe dan lain lain">
+                    <h2 class="script-title" id="scriptTitle1">1. Script PRRI v12</h2>
+                    <p style="color: #d4a574; margin-bottom: 10px;"><strong id="mapLabel">Map:</strong> <span id="map1">Brookhaven</span></p>
+                    <div class="script-features">
+                        <strong id="featuresLabel">Fitur:</strong>
+                        <ul>
+                            <li>-skybox</li>
+                            <li>-anti afz detect</li>
+                            <li>-copy Avatar player</li>
+                            <li>-fling</li>
+                            <li>-sound fe</li>
+                            <li>- dan lain lain</li>
+                        </ul>
+                    </div>
+                    <div class="script-code" id="script1">loadstring(game:HttpGet("https://raw.githubusercontent.com/AlrecTofficial67/ItsAlrecT67/refs/heads/main/PRRI_V12_UPDATE_INDONESIA_BYalrecT.txt"))()</div>
+                    <button class="copy-btn" onclick="copyScript('script1', this)">
+                        <span>📋</span> <span class="btn-text" data-id="copy">Salin</span>
+                    </button>
+                </div>
+
+                <div class="script-card" data-features="big jacket">
+                    <h2 class="script-title" id="scriptTitle2">2. Script Sky Destroyer</h2>
+                    <div class="version-selector">
+                        <button class="version-btn active" onclick="switchVersion('v10', this)" id="v10Btn">Version 10</button>
+                        <button class="version-btn" onclick="switchVersion('v1', this)" id="v1Btn">Version 1</button>
+                    </div>
+                    <div class="script-features">
+                        <strong id="featuresLabel2">Fitur:</strong>
+                        <ul>
+                            <li>-big jacket</li>
+                        </ul>
+                    </div>
+                    <div class="script-code" id="script2">-- Script sky destroyer v10
+loadstring(game:HttpGet("https://raw.githubusercontent.com/AlrecTofficial67/Sky_destroy_GG_alrect/refs/heads/main/script_sky_destroy_FE.txt", true))()</div>
+                    <button class="copy-btn" onclick="copyScript('script2', this)">
+                        <span>📋</span> <span class="btn-text" data-id="copy">Salin</span>
+                    </button>
+                </div>
+
+                <div class="script-card" data-features="">
+                    <h2 class="script-title" id="scriptTitle3">3. Next Script</h2>
+                    <p style="color: #d4a574; margin-bottom: 10px;"><strong id="mapLabel3">Map:</strong> <span id="map3">soon/universal</span></p>
+                    <div class="script-code" id="script3">coming soon</div>
+                    <button class="copy-btn" onclick="copyScript('script3', this)">
+                        <span>📋</span> <span class="btn-text" data-id="copy">Salin</span>
+                    </button>
+                </div>
+
+                <a href="https://ngl.link/alrectofficial" class="request-btn" target="_blank" id="requestBtn">
+                    <span>📝</span> <span id="requestText">Request bikin script apa lagi?</span>
+                </a>
+            </div>
+
+            <div id="download-tab" class="tab-content">
+                <div class="download-container">
+                    <h1 id="downloadH1">Download Video TikTok Tanpa Watermark</h1>
+                    <p id="downloadP">Masukkan link video TikTok di bawah ini untuk mengunduh tanpa watermark. Dukungan untuk kualitas HD.</p>
+                    <div class="input-group">
+                        <input type="text" id="video-link" placeholder="Paste link video di sini...">
+                        <button class="download-btn" onclick="pasteLink()" id="pasteBtn">Paste</button>
+                        <button class="download-btn" onclick="clearLink()" id="clearBtn">Clear</button>
+                    </div>
+                    <button class="download" onclick="getVideo()" id="downloadVideoBtn">Download</button>
+                    <div id="js-result"></div>
+                    <button class="back-btn" onclick="showTab('scripts')" id="backToScripts">Kembali ke Scripts</button>
+                </div>
+            </div>
+
+            <div id="minify-tab" class="tab-content">
+                <div class="minify-container">
+                    <h1 id="minifyH1">Minifier & Beautifier Lua Script untuk Roblox Executor</h1>
+                    <p id="minifyP">Masukkan script Lua Anda di bawah ini atau upload file .lua untuk mempersingkat (minify) atau memformat ulang (beautify) script agar lebih rapi.</p>
+                    
+                    <div class="minify-input-group">
+                        <label for="fileInput" class="minify-label" id="fileLabel">Upload File Lua (opsional):</label>
+                        <input type="file" id="fileInput" class="minify-file-input" accept=".lua,.txt">
+                    </div>
+                    
+                    <div class="minify-input-group">
+                        <label for="minifyInput" class="minify-label" id="inputLabel">Input Script Lua:</label>
+                        <textarea id="minifyInput" class="minify-textarea" placeholder="Paste atau ketik script Lua Anda di sini..."></textarea>
+                    </div>
+                    
+                    <div class="minify-action-buttons">
+                        <button class="minify-btn" onclick="minifyScript()" id="minifyBtn">Minify Script</button>
+                        <button class="minify-btn beautify" onclick="beautifyScript()" id="beautifyBtn">Beautify Script</button>
+                    </div>
+                    
+                    <div class="minify-output-group">
+                        <label for="minifyOutput" class="minify-label" id="outputLabel">Output Script:</label>
+                        <div class="minify-button-group">
+                            <button class="minify-btn copy" onclick="copyToClipboard()" id="copyClipboardBtn">Salin ke Clipboard</button>
+                            <button class="minify-btn download" onclick="downloadScript()" id="downloadLuaBtn">Download sebagai .lua</button>
+                        </div>
+                        <textarea id="minifyOutput" class="minify-textarea minify-output" readonly placeholder="Hasil minify atau beautify akan muncul di sini..."></textarea>
+                    </div>
+                    
+                    <div class="minify-warning" id="minifyWarning">
+                        <strong>Catatan:</strong> Minifier menghapus komentar dan spasi berlebih, dengan watermark di awal. Beautifier menambahkan indentasi dan format rapi (sederhana, mungkin tidak sempurna untuk kasus kompleks). Gunakan dengan hati-hati untuk script Roblox.
+                    </div>
+
+                    <button class="back-btn" onclick="showTab('scripts')" id="backToScriptsMinify">Kembali ke Scripts</button>
+                </div>
+            </div>
+
+            <div id="executor-tab" class="tab-content">
+                <div class="executor-section">
+                    <div class="container">
+                        <!-- Android Section - Full list from sample -->
+                        <div class="platform-header">
+                            <div class="platform-icon">📱</div>
+                            <div>
+                                <h2 class="platform-title" id="androidTitle">Android Executor</h2>
+                                <p class="platform-desc" id="androidDesc">Info dan download executor gratis dan paid untuk Android</p>
+                            </div>
+                            <div class="platform-badge">
+                                <span id="androidCount">15</span> Available
+                            </div>
+                        </div>
+                        <div class="executor-grid">
+                            <div class="executor-card featured" data-status="online">
+                                <h3 class="executor-name">Arceus X</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <span>5.0</span>
+                                <div class="detail-item"><span>Version:</span><span>2.697.926</span></div>
+                                <div class="detail-item"><span>VNG Version:</span><span>2.695.956</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>VNG Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>2.5M+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://android.spdmteam.com/" class="executor-download">Download</a>
+                                    <a href="https://vng.spdmteam.com/" class="executor-download">VNG</a>
+                                    <a href="https://whop.com/arceus-x/" class="executor-download executor-premium">Purchase V5</a>
+                                    <a href="https://discord.gg/lugia" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Krnl</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <span>5.0</span>
+                                <div class="detail-item"><span>Version:</span><span>2.697.926</span></div>
+                                <div class="detail-item"><span>VNG Version:</span><span>2.696.799</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>VNG Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>2M+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://krnl.filenetwork.vip/file/krnl_release_2.697.926_2025.11.2_53.apk" class="executor-download">Download</a>
+                                    <a href="https://krnl.filenetwork.vip/file/krnl_vng_release_2.696.799_2025.11.1_31.apk" class="executor-download">VNG</a>
+                                    <a href="https://discord.gg/getkrnl" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Codex</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span>4.2</span>
+                                <div class="detail-item"><span>Version:</span><span>2.696.799</span></div>
+                                <div class="detail-item"><span>VNG Version:</span><span>2.689.880</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>VNG Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>950K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://gofile.io/d/UzbLud" class="executor-download">Download</a>
+                                    <a href="https://www.mediafire.com/file/3piv87u6044r554/Codex_v2.689_VNG.apk/file" class="executor-download">VNG</a>
+                                    <a href="https://discord.gg/codexlol" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Cryptic</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span>4.6</span>
+                                <div class="detail-item"><span>Version:</span><span>2.696.799</span></div>
+                                <div class="detail-item"><span>VNG Version:</span><span>2.689.880</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>VNG Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>1.2M+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://www.mediafire.com/file/lj2ek86ykj6f9ld/Cryptic_2.696.799_APK.apk/file" class="executor-download">Download</a>
+                                    <a href="https://www.mediafire.com/file/pf4k4kacl46v02b/Cryptic+2.689.880+VNG.apk/file" class="executor-download">VNG</a>
+                                    <a href="https://discord.gg/getcryptic" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Delta</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span>4.5</span>
+                                <div class="detail-item"><span>Version:</span><span>2.697.926</span></div>
+                                <div class="detail-item"><span>VNG Version:</span><span>2.696.799</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>VNG Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>1.5M+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://delta.filenetwork.vip/file/Delta-2.697.926.apk" class="executor-download">Download</a>
+                                    <a href="https://www.mediafire.com/file/estzqi97cmtie2e/Delta_Vng_V2.697.926_Up.apk/file" class="executor-download">VNG</a>
+                                    <a href="https://discord.gg/deltax" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">JJsploit</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span>5.0</span>
+                                <div class="detail-item"><span>Version:</span><span>2.696.799</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>50K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://wrdcdn.net/r/103473/1761383013844/JJSploit_2.696.799.apk" class="executor-download">Download</a>
+                                    <a href="https://discord.com/invite/wearedevs" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Fluxus Z</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span>4.0</span>
+                                <div class="detail-item"><span>Version:</span><span>2.697.926</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>7.4K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://www.mediafire.com/file/3bmfa7wfnf4b0va/FluxusZ+V2.0.3.apk/file" class="executor-download">Download</a>
+                                    <a href="https://discord.gg/fluxusz" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Neutron</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span>4.2</span>
+                                <div class="detail-item"><span>Version:</span><span>2.697.926</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>5K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://www.mediafire.com/file/wrhznahr642uvjy/Neutron_697.apk/file" class="executor-download">Download</a>
+                                    <a href="https://discord.gg/37cV3nFpy9" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Fluxus</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span>4.3</span>
+                                <div class="detail-item"><span>Version:</span><span>2.687.816</span></div>
+                                <div class="detail-item"><span>VNG Version:</span><span>2.687.815</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>VNG Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>1.5M+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://app.box.com/s/h5wxr4yuuuoxr105aba10aceyxge94lo" class="executor-download disabled">Download</a>
+                                    <a href="https://modsfire.com/W1snqkMk3ckG8Sp" class="executor-download disabled">VNG</a>
+                                    <a href="discord.gg/9TFWvbKUWe" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Rift</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span>4.0</span>
+                                <div class="detail-item"><span>Version:</span><span>2.686.866</span></div>
+                                <div class="detail-item"><span>VNG Version:</span><span>2.674.786</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>VNG Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>600K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://www.mediafire.com/file/a53ob60j5m1ddhs/Rift+3.3.0.apk/file" class="executor-download disabled">Download</a>
+                                    <a href="https://www.mediafire.com/file/vcrfkmjxj14mvjl/Rift+3.0.0+VNG.apk/file" class="executor-download disabled">VNG</a>
+                                    <a href="https://discord.gg/VgsHH4FN5P" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Frostware</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span>4.1</span>
+                                <div class="detail-item"><span>Version:</span><span>2.687.816</span></div>
+                                <div class="detail-item"><span>VNG Version:</span><span>2.655.1095</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>VNG Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>750K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://www.mediafire.com/file/o9lxcvef190r77h/Frostware+Gen-X+V3.8(fixed).apk/file" class="executor-download">Download</a>
+                                    <a href="https://www.mediafire.com/file/2oefdp15evvka2c/Frostware+VNG+V4.2.apk/file" class="executor-download">VNG</a>
+                                    <a href="https://discord.gg/getfrost" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Radius</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span>3.9</span>
+                                <div class="detail-item"><span>Version:</span><span>2.695.955</span></div>
+                                <div class="detail-item"><span>VNG Version:</span><span>2.690.721</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>VNG Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>400K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://wrdcdn.net/r/154522/1761281302742/Ronix.apk" class="executor-download">Download</a>
+                                    <a href="https://cdn.discordapp.com/attachments/1414766709579059240/1420876126779080786/NEW_Vietnam_2.690.721.apk?ex=68d6fd83&is=68d5ac03&hm=a159ff9f7d9c63c8bbd0e13062be2e57772de62d84ac9c671897cd805f8e90a4&" class="executor-download">VNG</a>
+                                    <a href="https://discord.gg/ronix" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Evon</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span>4.0</span>
+                                <div class="detail-item"><span>Version:</span><span>2.696.799</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>500K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://evon.cc/android/dl-a/Evon.apk" class="executor-download">Download</a>
+                                    <a href="https://discord.gg/x5AT9UMMWG" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Trigon</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span>4.4</span>
+                                <div class="detail-item"><span>Version:</span><span>2.696.799</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>650K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://www.mediafire.com/file/ydbo0w4g2d2r6vp/Trigon_v2.696.799.apk/file" class="executor-download">Download</a>
+                                    <a href="https://discord.gg/qQMs6ns5Za" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">VegaX</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span>4.2</span>
+                                <div class="detail-item"><span>Version:</span><span>2.696.799</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>550K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://github.com/1f0yt/community/releases/download/Vegax/Vega.X.apk" class="executor-download">Download</a>
+                                    <a href="https://discord.gg/DvvdeNBnZt" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- iOS Section - From sample (though user asked for Android/Windows/others, but included for completeness) -->
+                        <div class="platform-header">
+                            <div class="platform-icon">🍏</div>
+                            <div>
+                                <h2 class="platform-title" id="iosTitle">iOS Executor</h2>
+                                <p class="platform-desc" id="iosDesc">Info dan download executor gratis dan paid untuk iOS</p>
+                            </div>
+                            <div class="platform-badge">
+                                <span id="iosCount">5</span> Available
+                            </div>
+                        </div>
+                        <div class="executor-grid">
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Krnl</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span>4.7</span>
+                                <div class="detail-item"><span>Version:</span><span>2.697.925</span></div>
+                                <div class="detail-item"><span>VNG Version:</span><span>2.695.955</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>VNG Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>850K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://krnl.filenetwork.vip/file/Krnl_release_697.ipa" class="executor-download">Download</a>
+                                    <a href="https://zufile.com/download/WlSJnsTwRk" class="executor-download">VNG</a>
+                                    <a href="https://discord.gg/getkrnl" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Delta</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span>4.5</span>
+                                <div class="detail-item"><span>Version:</span><span>2.697.925</span></div>
+                                <div class="detail-item"><span>VNG Version:</span><span>2.697.925</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>VNG Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>500K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://cdn.gloopup.net/file/Delta-2.697.925.ipa" class="executor-download">Download</a>
+                                    <a href="https://www.mediafire.com/file/z1ghjnadgobky7k/Delta+VNG+v2.697.ipa/file" class="executor-download">VNG</a>
+                                    <a href="https://discord.gg/deltax" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="offline">
+                                <h3 class="executor-name">Arceus X NEO</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <span>4.9</span>
+                                <div class="detail-item"><span>Version:</span><span>2.668.660</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>1.1M+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://ios.spdmteam.com" class="executor-download disabled">Download</a>
+                                    <a href="https://discord.gg/lugia" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="offline">
+                                <h3 class="executor-name">Codex</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span>4.2</span>
+                                <div class="detail-item"><span>Version:</span><span>2.674.786</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>600K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://www.mediafire.com/file/7afzer5xxo1110n/Codex_2.674.782.ipa/file" class="executor-download disabled">Download</a>
+                                    <a href="https://discord.gg/codexlol" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="offline">
+                                <h3 class="executor-name">Cryptic</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span>4.6</span>
+                                <div class="detail-item"><span>Version:</span><span>2.668.660</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>750K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://www.mediafire.com/file/okr6d1frv52l9zo/Cryptic_2.668.658+iOS.ipa/file" class="executor-download disabled">Download</a>
+                                    <a href="https://discord.gg/qM3WZhQShn" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Windows Section - Full list from sample -->
+                        <div class="platform-header">
+                            <div class="platform-icon">🪟</div>
+                            <div>
+                                <h2 class="platform-title" id="windowsTitle">Windows Executor</h2>
+                                <p class="platform-desc" id="windowsDesc">Info dan download executor gratis dan paid untuk Windows</p>
+                            </div>
+                            <div class="platform-badge">
+                                <span id="windowsCount">25+</span> Available
+                            </div>
+                        </div>
+                        <div class="executor-grid">
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">BUNNI.lOL</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span>4.6</span>
+                                <div class="detail-item"><span>Version:</span><span>version-f6dd34ecac7b4642</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>50K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://github.com/vmp0rblx/bunni-download/raw/refs/heads/main/latestbunni.zip" class="executor-download">Download</a>
+                                    <a href="https://discord.gg/9DPW2G22cF" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Zenith</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <span>5.0</span>
+                                <div class="detail-item"><span>Version:</span><span>version-f6dd34ecac7b4642</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Type:</span><span>Paid Executor</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://zenith.win/" class="executor-download executor-premium">Paid Executor</a>
+                                    <a href="https://discord.com/invite/g8knYkUpQn" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Swift</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span>4.6</span>
+                                <div class="detail-item"><span>Version:</span><span>version-c1ac69007bdc4e48</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>1.8M+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://getswift.vip//download" class="executor-download">Download</a>
+                                    <a href="https://discord.gg/getswiftgg" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Velocity</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span>4.9</span>
+                                <div class="detail-item"><span>Version:</span><span>version-f6dd34ecac7b4642</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>1.2M+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://gofile.io/d/OAdat2" class="executor-download">Download</a>
+                                    <a href="https://discord.gg/velocityide" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Volcano</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span>4.9</span>
+                                <div class="detail-item"><span>Version:</span><span>version-f6dd34ecac7b4642</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>800K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://volcano.wtf/" class="executor-download">Download</a>
+                                    <a href="https://discord.gg/zSnS9kCxJX" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">World Client</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span>4.5</span>
+                                <div class="detail-item"><span>Version:</span><span>version-f6dd34ecac7b4642</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>4.7K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://useworld.xyz/" class="executor-download">Download</a>
+                                    <a href="https://discord.gg/WMsYZgmCYA" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Yub-X</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <span>4</span>
+                                <div class="detail-item"><span>Version:</span><span>version-4aeb17bd13994560</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>3K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://yub-x.com/download" class="executor-download">Download</a>
+                                    <a href="https://discord.gg/7A2CMnbzcz" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Ronix</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span>4.1</span>
+                                <div class="detail-item"><span>Version:</span><span>version-f6cd26d0e71b47c9</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>5K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://wrdcdn.net/r/2/1758984762667/Ronix.zip" class="executor-download">Download</a>
+                                    <a href="https://discord.gg/ronix" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">TNG</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span>4.7</span>
+                                <div class="detail-item"><span>Version:</span><span>version-f6dd34ecac7b4642</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>17K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://zufile.com/download/qCC8N7D7qP" class="executor-download">Download</a>
+                                    <a href="https://discord.gg/2eZpnxrcRA" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Azrix</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <span>3.9</span>
+                                <div class="detail-item"><span>Version:</span><span>version-f6dd34ecac7b4642</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>8.7K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://filedm.com/axOIy" class="executor-download">Download</a>
+                                    <a href="" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">LX63</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span>4.0</span>
+                                <div class="detail-item"><span>Version:</span><span>version-4aeb17bd13994560</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>600K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://github.com/x64lx/AVARDEDENDERDE/raw/refs/heads/main/LX63241025.zip" class="executor-download">Download</a>
+                                    <a href="https://discord.gg/eQP6Y5pKWQ" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Xeno</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span>4.5</span>
+                                <div class="detail-item"><span>Version:</span><span>version-f6dd34ecac7b4642</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>2.1M+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://www.xeno.onl/downloaded " class="executor-download">Download</a>
+                                    <a href="https://discord.gg/xeno-now" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="offline">
+                                <h3 class="executor-name">AWP.GG</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <span>4.9</span>
+                                <div class="detail-item"><span>Version:</span><span>version-78712d8739f34cb9</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Type:</span><span>Paid Executor</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://buyawp.gg/" class="executor-download executor-premium disabled">Paid Executor</a>
+                                    <a href="https://discord.com/invite/awpgg" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Wave</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span>4.7</span>
+                                <div class="detail-item"><span>Version:</span><span>version-f6dd34ecac7b4642</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Type:</span><span>Paid Executor</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://getwave.gg" class="executor-download executor-premium">Paid Executor</a>
+                                    <a href="https://discord.gg/getwave" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Drift</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span>4.2</span>
+                                <div class="detail-item"><span>Version:</span><span>version-889d2588b25a43d1</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>450K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://wrdcdn.net/r/118757/1761950018370/ReleaseEXT1.0.0.zip" class="executor-download">Download</a>
+                                    <a href="https://discord.gg/realzorara" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Valex</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span>4.1</span>
+                                <div class="detail-item"><span>Version:</span><span>version-889d2588b25a43d1</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>1.8K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://valex.io" class="executor-download">Download</a>
+                                    <a href="https://discord.gg/valex" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Potassium</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <span>4.8</span>
+                                <div class="detail-item"><span>Version:</span><span>version-889d2588b25a43d1</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Type:</span><span>Paid Executor</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://potassium.pro" class="executor-download executor-premium">Paid Executor</a>
+                                    <a href="https://discord.com/invite/potassium" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Seliware</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span>4.6</span>
+                                <div class="detail-item"><span>Version:</span><span>version-f6dd34ecac7b4642</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Type:</span><span>Paid Executor</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://seliware.com/" class="executor-download executor-premium">Paid Executor</a>
+                                    <a href="https://discord.gg/m6zAQ3KNsP" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Trigon</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span>4.4</span>
+                                <div class="detail-item"><span>Version:</span><span>version-889d2588b25a43d1</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>9K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://www.mediafire.com/file/5my3qeo12xojy7v/trigon-evo-0.2.0.exe/file" class="executor-download">Download</a>
+                                    <a href="https://discord.gg/cCm7byQCPe" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">SirHurt</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <span>4.9</span>
+                                <div class="detail-item"><span>Version:</span><span>version-f6dd34ecac7b4642</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Type:</span><span>Paid Executor</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://sirhurt.net/" class="executor-download executor-premium">Paid Executor</a>
+                                    <a href="https://www.discord.gg/CPKvWTgFdV" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">JJSploit</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span>3.5</span>
+                                <div class="detail-item"><span>Version:</span><span>version-f6dd34ecac7b4642</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>5.2K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://github.com/wcrddn/wcrddn.github.io/raw/refs/heads/main/0921/jjsploit_8.16.5_x64_en-US.msi" class="executor-download">Download</a>
+                                    <a href="https://discord.gg/wearedevs" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Solara</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span>4.6</span>
+                                <div class="detail-item"><span>Version:</span><span>version-f6dd34ecac7b4642</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>20K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://getsolara.dev/download/static/files/BootstrapperNew.exe" class="executor-download">Download</a>
+                                    <a href="" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Artic</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span>4.0</span>
+                                <div class="detail-item"><span>Version:</span><span>version-89b6c70d8f7f42ac</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>300+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://cdn.discordapp.com/attachments/1404426644650852454/1408181428784463912/Arctic-3.3s.zip?ex=68a8cea7&is=68a77d27&hm=3d8c285c3ba0efaab5350034715d7d14eecd666b4c01f070e91dd4a56625bc0d&" class="executor-download">Download</a>
+                                    <a href="https://discord.gg/arctic-studios-1329873465897128058" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Saturn X</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span>4.1</span>
+                                <div class="detail-item"><span>Version:</span><span>version-4aeb17bd13994560</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>4K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://saturn-website-gamma.vercel.app/" class="executor-download">Download</a>
+                                    <a href="https://discord.gg/RrNWfpjtHA" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- macOS Section - Full list from sample -->
+                        <div class="platform-header">
+                            <div class="platform-icon">🍎</div>
+                            <div>
+                                <h2 class="platform-title" id="macosTitle">macOS Executor</h2>
+                                <p class="platform-desc" id="macosDesc">Info dan download executor gratis dan paid untuk macOS</p>
+                            </div>
+                            <div class="platform-badge">
+                                <span id="macosCount">4</span> Available
+                            </div>
+                        </div>
+                        <div class="executor-grid">
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Hydrogen</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span>4.7</span>
+                                <div class="detail-item"><span>Version:</span><span>version-6e8186c3f6ce4303</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Type:</span><span>Paid Executor</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://hydrogenmacos.selly.store/" class="executor-download executor-premium">Paid Executor</a>
+                                    <a href="https://discord.gg/gethydrogen" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Opiumware</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span>4.0</span>
+                                <div class="detail-item"><span>Version:</span><span>version-c19e695f9cce4f80</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>20K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://discord.gg/getopium" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="offline">
+                                <h3 class="executor-name">MacSploit</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <span>4.9</span>
+                                <div class="detail-item"><span>Version:</span><span>version-df9924f3990d4a6a</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Type:</span><span>Paid Executor</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://www.raptor.fun/" class="executor-download executor-premium">Paid Executor</a>
+                                    <a href="https://discord.com/invite/macsploit" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Radius</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span>4.0</span>
+                                <div class="detail-item"><span>Version:</span><span>version-6e8186c3f6ce4303</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>200K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://discord.gg/ronix" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">BUNNI.LOL</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span>4.5</span>
+                                <div class="detail-item"><span>Version:</span><span>version-2cd3c2cb69e54247</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Downloads:</span><span>150K+</span></div>
+                                <div class="executor-actions">
+                                    <a href="" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- External Section - Full list from sample -->
+                        <div class="platform-header">
+                            <div class="platform-icon">💻</div>
+                            <div>
+                                <h2 class="platform-title" id="externalTitle">External Executor</h2>
+                                <p class="platform-desc" id="externalDesc">Info dan download executor gratis dan paid external</p>
+                            </div>
+                            <div class="platform-badge">
+                                <span id="externalCount">8</span> Available
+                            </div>
+                        </div>
+                        <div class="executor-grid">
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Ronin</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <span>5.0</span>
+                                <div class="detail-item"><span>Version:</span><span>version-889d2588b25a43d1</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-offline">Offline</span></div>
+                                <div class="detail-item"><span>Type:</span><span>Paid Executor</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://getronin.xyz" class="executor-download executor-premium">Paid Executor</a>
+                                    <a href="https://discord.gg/7GZqhErX8C" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Valex</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span>4.1</span>
+                                <div class="detail-item"><span>Version:</span><span>version-f6dd34ecac7b4642</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Type:</span><span>External</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://github.com/1Softworks/assets/raw/refs/heads/main/Valex_External.zip" class="executor-download">Download</a>
+                                    <a href="https://discord.gg/valex" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">TNG</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span>3.7</span>
+                                <div class="detail-item"><span>Version:</span><span>version-f6dd34ecac7b4642</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Type:</span><span>External</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://zufile.com/download/DMVz4QFH1w" class="executor-download">Download</a>
+                                    <a href="https://discord.gg/2eZpnxrcRA" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">DX9WARE</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span>4.7</span>
+                                <div class="detail-item"><span>Version:</span><span>version-f6dd34ecac7b4642</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Type:</span><span>Paid Executor</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://cultofintellect.com/dx9ware/" class="executor-download executor-premium">Paid Executor</a>
+                                    <a href="https://discord.com/invite/3eTeZjywuV" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Photon</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <span>4.8</span>
+                                <div class="detail-item"><span>Version:</span><span>version-f6dd34ecac7b4642</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Type:</span><span>Paid Executor</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://photonsys.sellpass.io/" class="executor-download executor-premium">Paid Executor</a>
+                                    <a href="https://discord.gg/vro" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Isabelle</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span>4.6</span>
+                                <div class="detail-item"><span>Version:</span><span>version-f6dd34ecac7b4642</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Type:</span><span>Paid Executor</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://ext.sellsn.io/" class="executor-download executor-premium">Paid Executor</a>
+                                    <a href="https://discord.gg/isabelle" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Matrix Hub</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                                <span>4.3</span>
+                                <div class="detail-item"><span>Version:</span><span>version-f6dd34ecac7b4642</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Type:</span><span>Paid Executor</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://matrixhubs.shop/" class="executor-download executor-premium">Paid Executor</a>
+                                    <a href="https://discord.com/invite/yPjkUBcWgR" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                            <div class="executor-card" data-status="online">
+                                <h3 class="executor-name">Matcha</h3>
+                                <div class="stars-rating">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span>4.5</span>
+                                <div class="detail-item"><span>Version:</span><span>version-f6dd34ecac7b4642</span></div>
+                                <div class="detail-item"><span>Status:</span><span class="status-online">Online</span></div>
+                                <div class="detail-item"><span>Type:</span><span>Paid Executor</span></div>
+                                <div class="executor-actions">
+                                    <a href="https://bloxproducts.com/#Matcha" class="executor-download executor-premium">Paid Executor</a>
+                                    <a href="https://discord.gg/asmlol" class="executor-discord"><i class="fab fa-discord"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="back-btn" onclick="showTab('scripts')" id="backToScriptsExecutor">Kembali ke Scripts</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Generate stars
+        const starsContainer = document.getElementById('starsContainer');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.width = star.style.height = (Math.random() * 2 + 1) + 'px';
+            starsContainer.appendChild(star);
+        }
+
+        let currentLang = 'id';
+        let currentVersion = 'v10';
+
+        const translations = {
+            id: {
+                mainTitle: 'Web Resmi Alrect Scripter',
+                mainSubtitle: 'Pake script yang baik, jangan ngerugiin orang lain',
+                langBtn: 'English',
+                ownerLabel: 'Owner:',
+                copy: 'Salin',
+                copied: 'Tersalin!',
+                searchPlaceholder: 'Cari script atau fitur...',
+                scriptsTab: 'Scripts Roblox',
+                downloadTab: 'Fitur Download TikTok Video',
+                minifyTab: 'Minify/Beautify',
+                executorTab: 'Executor',
+                scriptTitle1: '1. Script PRRI v12',
+                mapLabel: 'Map:',
+                map1: 'Brookhaven',
+                featuresLabel: 'Fitur:',
+                scriptTitle2: '2. Script Sky Destroyer',
+                v10Btn: 'Version 10',
+                v1Btn: 'Version 1',
+                featuresLabel2: 'Fitur:',
+                scriptTitle3: '3. Next Script',
+                map3: 'soon/universal',
+                requestText: 'Request bikin script apa lagi?',
+                scriptbloxBtn: 'Scriptblox',
+                whatsappBtn: 'WhatsApp',
+                channelBtn: 'Masuk Saluran Alrect',
+                downloadH1: 'Download Video TikTok Tanpa Watermark',
+                downloadP: 'Masukkan link video TikTok di bawah ini untuk mengunduh tanpa watermark. Dukungan untuk kualitas HD.',
+                videoPlaceholder: 'Paste link video di sini...',
+                pasteBtn: 'Paste',
+                clearBtn: 'Clear',
+                downloadVideoBtn: 'Download',
+                backToScripts: 'Kembali ke Scripts',
+                downloadLinkHD: 'Unduh HD',
+                downloadLinkSD: 'Unduh SD',
+                minifyH1: 'Minifier & Beautifier Lua Script untuk Roblox Executor',
+                minifyP: 'Masukkan script Lua Anda di bawah ini atau upload file .lua untuk mempersingkat (minify) atau memformat ulang (beautify) script agar lebih rapi.',
+                fileLabel: 'Upload File Lua (opsional):',
+                inputLabel: 'Input Script Lua:',
+                inputPlaceholder: 'Paste atau ketik script Lua Anda di sini...',
+                minifyBtn: 'Minify Script',
+                beautifyBtn: 'Beautify Script',
+                outputLabel: 'Output Script:',
+                copyClipboardBtn: 'Salin ke Clipboard',
+                downloadLuaBtn: 'Download sebagai .lua',
+                outputPlaceholder: 'Hasil minify atau beautify akan muncul di sini...',
+                minifyWarning: '<strong>Catatan:</strong> Minifier menghapus komentar dan spasi berlebih, dengan watermark di awal. Beautifier menambahkan indentasi dan format rapi (sederhana, mungkin tidak sempurna untuk kasus kompleks). Gunakan dengan hati-hati untuk script Roblox.',
+                backToScriptsMinify: 'Kembali ke Scripts',
+                backToScriptsExecutor: 'Kembali ke Scripts',
+                androidTitle: 'Android Executor',
+                androidDesc: 'Info dan download executor gratis dan paid untuk Android',
+                iosTitle: 'iOS Executor',
+                iosDesc: 'Info dan download executor gratis dan paid untuk iOS',
+                windowsTitle: 'Windows Executor',
+                windowsDesc: 'Info dan download executor gratis dan paid untuk Windows',
+                macosTitle: 'macOS Executor',
+                macosDesc: 'Info dan download executor gratis dan paid untuk macOS',
+                externalTitle: 'External Executor',
+                externalDesc: 'Info dan download executor gratis dan paid external',
+                downloadLang: {
+                    linkEmpty: "Link nya masih kosong",
+                    processing: "Sedang memproses...",
+                    success: "Video siap diunduh!",
+                    error: "Error: ",
+                    noVideo: "Tidak ditemukan video dari link tersebut."
+                },
+                minifyAlerts: {
+                    noInput: 'Silakan masukkan script Lua terlebih dahulu!',
+                    noOutput: 'Tidak ada hasil untuk disalin! Jalankan minify atau beautify terlebih dahulu.',
+                    copied: 'Tersalin ke clipboard!',
+                    copyError: 'Gagal menyalin: '
+                }
+            },
+            en: {
+                mainTitle: 'Alrect Scripter Official Website',
+                mainSubtitle: 'Use scripts wisely, don\'t harm others',
+                langBtn: 'Bahasa',
+                ownerLabel: 'Owner:',
+                copy: 'Copy',
+                copied: 'Copied!',
+                searchPlaceholder: 'Search script or feature...',
+                scriptsTab: 'Roblox Scripts',
+                downloadTab: 'TikTok Video Download Feature',
+                minifyTab: 'Minify/Beautify',
+                executorTab: 'Executor',
+                scriptTitle1: '1. PRRI Script v12',
+                mapLabel: 'Map:',
+                map1: 'Brookhaven',
+                featuresLabel: 'Features:',
+                scriptTitle2: '2. Sky Destroyer Script',
+                v10Btn: 'Version 10',
+                v1Btn: 'Version 1',
+                featuresLabel2: 'Features:',
+                scriptTitle3: '3. Next Script',
+                map3: 'soon/universal',
+                requestText: 'Request what script to make next?',
+                scriptbloxBtn: 'Scriptblox',
+                whatsappBtn: 'WhatsApp',
+                channelBtn: 'Enter Alrect Channel',
+                downloadH1: 'Download TikTok Video Without Watermark',
+                downloadP: 'Enter the TikTok video link below to download without watermark. Supports HD quality.',
+                videoPlaceholder: 'Paste video link here...',
+                pasteBtn: 'Paste',
+                clearBtn: 'Clear',
+                downloadVideoBtn: 'Download',
+                backToScripts: 'Back to Scripts',
+                downloadLinkHD: 'Download HD',
+                downloadLinkSD: 'Download SD',
+                minifyH1: 'Lua Script Minifier & Beautifier for Roblox Executor',
+                minifyP: 'Enter your Lua script below or upload a .lua file to minify or reformat (beautify) the script for better readability.',
+                fileLabel: 'Upload Lua File (optional):',
+                inputLabel: 'Input Lua Script:',
+                inputPlaceholder: 'Paste or type your Lua script here...',
+                minifyBtn: 'Minify Script',
+                beautifyBtn: 'Beautify Script',
+                outputLabel: 'Output Script:',
+                copyClipboardBtn: 'Copy to Clipboard',
+                downloadLuaBtn: 'Download as .lua',
+                outputPlaceholder: 'Minify or beautify results will appear here...',
+                minifyWarning: '<strong>Note:</strong> Minifier removes comments and extra spaces, with a watermark at the beginning. Beautifier adds indentation and neat formatting (simple, may not be perfect for complex cases). Use carefully for Roblox scripts.',
+                backToScriptsMinify: 'Back to Scripts',
+                backToScriptsExecutor: 'Back to Scripts',
+                androidTitle: 'Android Executor',
+                androidDesc: 'Info and download free and paid executor for Android',
+                iosTitle: 'iOS Executor',
+                iosDesc: 'Info and download free and paid executor for iOS',
+                windowsTitle: 'Windows Executor',
+                windowsDesc: 'Info and download free and paid executor for Windows',
+                macosTitle: 'macOS Executor',
+                macosDesc: 'Info and download free and paid executor for macOS',
+                externalTitle: 'External Executor',
+                externalDesc: 'Info and download free and paid external executor',
+                downloadLang: {
+                    linkEmpty: "The link is still empty",
+                    processing: "Processing...",
+                    success: "Video ready to download!",
+                    error: "Error: ",
+                    noVideo: "No video found from that link."
+                },
+                minifyAlerts: {
+                    noInput: 'Please enter a Lua script first!',
+                    noOutput: 'No result to copy! Run minify or beautify first.',
+                    copied: 'Copied to clipboard!',
+                    copyError: 'Failed to copy: '
+                }
+            }
+        };
+
+        const scriptVersions = {
+            v10: `-- Script sky destroyer v10
+loadstring(game:HttpGet("https://raw.githubusercontent.com/AlrecTofficial67/Sky_destroy_GG_alrect/refs/heads/main/script_sky_destroy_FE.txt", true))()`,
+            v1: `-- Script v1
+loadstring(game:HttpGet("https://pastefy.app/nuefMy0Y/raw"))()`
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'id' ? 'en' : 'id';
+            const t = translations[currentLang];
+
+            document.getElementById('mainTitle').textContent = t.mainTitle;
+            document.getElementById('mainSubtitle').textContent = t.mainSubtitle;
+            document.getElementById('langText').textContent = t.langBtn;
+            document.getElementById('ownerLabel').textContent = t.ownerLabel;
+            document.getElementById('searchInput').placeholder = t.searchPlaceholder;
+            
+            // Social buttons
+            document.getElementById('scriptbloxBtn').textContent = t.scriptbloxBtn;
+            document.getElementById('whatsappBtn').textContent = t.whatsappBtn;
+            document.getElementById('channelBtn').textContent = t.channelBtn;
+            
+            // Tabs
+            document.getElementById('scriptsTabBtn').textContent = t.scriptsTab;
+            document.getElementById('downloadTabBtn').textContent = t.downloadTab;
+            document.getElementById('minifyTabBtn').textContent = t.minifyTab;
+            document.getElementById('executorTabBtn').textContent = t.executorTab;
+            
+            // Scripts tab
+            document.getElementById('scriptTitle1').textContent = t.scriptTitle1;
+            document.getElementById('mapLabel').textContent = t.mapLabel;
+            document.getElementById('map1').textContent = t.map1;
+            document.getElementById('featuresLabel').textContent = t.featuresLabel;
+            document.getElementById('featuresLabel2').textContent = t.featuresLabel2;
+            document.getElementById('scriptTitle2').textContent = t.scriptTitle2;
+            document.getElementById('v10Btn').textContent = t.v10Btn;
+            document.getElementById('v1Btn').textContent = t.v1Btn;
+            document.getElementById('scriptTitle3').textContent = t.scriptTitle3;
+            document.getElementById('mapLabel3').textContent = t.mapLabel;
+            document.getElementById('map3').textContent = t.map3;
+            document.getElementById('requestText').textContent = t.requestText;
+
+            // Download tab
+            document.getElementById('downloadH1').textContent = t.downloadH1;
+            document.getElementById('downloadP').textContent = t.downloadP;
+            document.getElementById('video-link').placeholder = t.videoPlaceholder;
+            document.getElementById('pasteBtn').textContent = t.pasteBtn;
+            document.getElementById('clearBtn').textContent = t.clearBtn;
+            document.getElementById('downloadVideoBtn').textContent = t.downloadVideoBtn;
+            document.getElementById('backToScripts').textContent = t.backToScripts;
+
+            // Minify tab
+            document.getElementById('minifyH1').textContent = t.minifyH1;
+            document.getElementById('minifyP').textContent = t.minifyP;
+            document.getElementById('fileLabel').textContent = t.fileLabel;
+            document.getElementById('minifyInput').placeholder = t.inputPlaceholder;
+            document.getElementById('inputLabel').textContent = t.inputLabel;
+            document.getElementById('minifyBtn').textContent = t.minifyBtn;
+            document.getElementById('beautifyBtn').textContent = t.beautifyBtn;
+            document.getElementById('outputLabel').textContent = t.outputLabel;
+            document.getElementById('copyClipboardBtn').textContent = t.copyClipboardBtn;
+            document.getElementById('downloadLuaBtn').textContent = t.downloadLuaBtn;
+            document.getElementById('minifyOutput').placeholder = t.outputPlaceholder;
+            document.getElementById('minifyWarning').innerHTML = t.minifyWarning;
+            document.getElementById('backToScriptsMinify').textContent = t.backToScriptsMinify;
+
+            // Executor tab
+            document.getElementById('androidTitle').textContent = t.androidTitle;
+            document.getElementById('androidDesc').textContent = t.androidDesc;
+            document.getElementById('iosTitle').textContent = t.iosTitle;
+            document.getElementById('iosDesc').textContent = t.iosDesc;
+            document.getElementById('windowsTitle').textContent = t.windowsTitle;
+            document.getElementById('windowsDesc').textContent = t.windowsDesc;
+            document.getElementById('macosTitle').textContent = t.macosTitle;
+            document.getElementById('macosDesc').textContent = t.macosDesc;
+            document.getElementById('externalTitle').textContent = t.externalTitle;
+            document.getElementById('externalDesc').textContent = t.externalDesc;
+            document.getElementById('backToScriptsExecutor').textContent = t.backToScriptsExecutor;
+            
+            // Update copy buttons
+            document.querySelectorAll('.btn-text[data-id="copy"]').forEach(el => {
+                if (!el.closest('.copy-btn').classList.contains('copied')) {
+                    el.textContent = t.copy;
+                }
+            });
+
+            // Update downloadLang
+            window.downloadLang = t.downloadLang;
+            window.minifyAlerts = t.minifyAlerts;
+        }
+
+        function switchVersion(version, btn) {
+            currentVersion = version;
+            document.getElementById('script2').textContent = scriptVersions[version];
+            
+            document.querySelectorAll('.version-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function copyScript(scriptId, btn) {
+            const scriptText = document.getElementById(scriptId).textContent;
+            const textArea = document.createElement('textarea');
+            textArea.value = scriptText;
+            document.body.appendChild(textArea);
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                const btnText = btn.querySelector('.btn-text');
+                const originalText = btnText.textContent;
+                btnText.textContent = translations[currentLang].copied;
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btnText.textContent = translations[currentLang].copy;
+                    btn.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                console.error('Gagal menyalin:', err);
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const scriptCards = document.querySelectorAll('.script-card');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            
+            scriptCards.forEach(card => {
+                const title = card.querySelector('.script-title').textContent.toLowerCase();
+                const features = card.dataset.features.toLowerCase();
+                const matches = title.includes(searchTerm) || features.includes(searchTerm);
+                card.classList.toggle('hidden', !matches);
+            });
+        });
+
+        // Tab functionality
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(tabId + '-tab').classList.add('active');
+
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`.tab-btn[onclick="showTab('${tabId}')"]`).classList.add('active');
+        }
+
+        // Download TikTok JS
+        window.downloadLang = translations[currentLang].downloadLang;
+
+        function pasteLink() {
+            var input = document.getElementById('video-link');
+            input.focus();
+            navigator.clipboard.readText().then(text => {
+                input.value = text;
+            }).catch(err => {
+                console.error('Gagal paste: ', err);
+            });
+        }
+
+        function clearLink() {
+            document.getElementById('video-link').value = '';
+            document.getElementById('js-result').innerHTML = '';
+        }
+
+        async function getVideo() {
+            var url = document.getElementById('video-link').value.trim();
+            if (!url) {
+                alert(window.downloadLang.linkEmpty);
+                return;
+            }
+
+            var resultDiv = document.getElementById('js-result');
+            resultDiv.innerHTML = `<p class="progress">${window.downloadLang.processing}</p>`;
+
+            try {
+                var apiUrl = `https://www.tikwm.com/api/?url=${encodeURIComponent(url)}&hd=1`;
+                var response = await fetch(apiUrl);
+                if (!response.ok) {
+                    throw new Error('Gagal mengambil data dari server');
+                }
+                var data = await response.json();
+
+                if (data.code !== 0 || !data.data) {
+                    throw new Error(data.msg || window.downloadLang.noVideo);
+                }
+
+                var videoHd = data.data.hdplay;
+                var videoSd = data.data.play;
+                var title = data.data.title || 'video_tiktok';
+                var author = data.data.author ? data.data.author.nickname : 'Unknown';
+
+                resultDiv.innerHTML = `
+                    <p>${window.downloadLang.success}</p>
+                    <p>Title: ${title}</p>
+                    <p>Author: ${author}</p>
+                    <video src="${videoHd}" controls></video>
+                    <a class="download-link" href="${videoHd}" download="${title}_hd.mp4">${translations[currentLang].downloadLinkHD}</a>
+                    <a class="download-link" href="${videoSd}" download="${title}_sd.mp4">${translations[currentLang].downloadLinkSD}</a>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `<p class="error">${window.downloadLang.error}${error.message}</p>`;
+            }
+        }
+
+        // Minify/Beautify JS
+        window.minifyAlerts = translations[currentLang].minifyAlerts;
+        // Handle file upload
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('minifyInput').value = e.target.result;
+                };
+                reader.readAsText(file);
+            }
+        });
+
+        function minifyScript() {
+            const input = document.getElementById('minifyInput').value;
+            if (!input.trim()) {
+                alert(window.minifyAlerts.noInput);
+                return;
+            }
+            
+            const minified = minifyLua(input);
+            document.getElementById('minifyOutput').value = minified;
+        }
+
+        function beautifyScript() {
+            const input = document.getElementById('minifyInput').value;
+            if (!input.trim()) {
+                alert(window.minifyAlerts.noInput);
+                return;
+            }
+            
+            const beautified = beautifyLua(input);
+            document.getElementById('minifyOutput').value = beautified;
+        }
+
+        function minifyLua(code) {
+            // Hapus komentar multi-line --[[ ... ]]
+            code = code.replace(/--\[\[[\s\S]*?\]\]/g, '');
+            
+            // Hapus komentar single-line -- ... (per baris)
+            code = code.replace(/--[^\r\n]*$/gm, '');
+            
+            // Ganti multiple whitespace (spasi, tab, newline) dengan single space
+            code = code.replace(/\s+/g, ' ');
+            
+            // Hapus spasi di sekitar operator dan tanda baca umum Lua
+            code = code.replace(/\s*([{}();,=+\-*/^%<>!~|&?:\[\]])\s*/g, '$1');
+            
+            // Hapus spasi di awal dan akhir
+            code = code.trim();
+            
+            // Tambahkan watermark di bagian pertama
+            code = "-- By Alrect official V0.9\n" + code;
+            
+            return code;
+        }
+
+        function beautifyLua(code) {
+            // Hapus komentar single-line untuk simplicity, tapi biarkan multi-line jika ada
+            code = code.replace(/--[^\r\n]*$/gm, '');
+            
+            let lines = code.split('\n');
+            let result = [];
+            let indentLevel = 0;
+            const indentStr = '  '; // Dua spasi untuk indent
+
+            const openingKeywords = /^(do|if|while|for|function|repeat)\b/;
+            const closingKeywords = /^(end|until|else|elseif)\b/;
+
+            for (let line of lines) {
+                let trimmed = line.trim();
+                if (!trimmed) {
+                    result.push('');
+                    continue;
+                }
+
+                if (openingKeywords.test(trimmed)) {
+                    result.push(trimmed);
+                    indentLevel++;
+                } else if (closingKeywords.test(trimmed)) {
+                    indentLevel = Math.max(0, indentLevel - 1);
+                    result.push(indentStr.repeat(indentLevel) + trimmed);
+                } else {
+                    // Tambahkan indent untuk statement biasa
+                    result.push(indentStr.repeat(indentLevel) + trimmed);
+                }
+
+                // Tambahkan newline setelah statement utama jika diperlukan
+                if (!trimmed.endsWith(';') && !trimmed.endsWith('end') && !trimmed.endsWith('until')) {
+                    result[result.length - 1] += ';'; // Tambah ; jika bukan closing
+                }
+            }
+
+            return result.join('\n');
+        }
+
+        function copyToClipboard() {
+            const output = document.getElementById('minifyOutput');
+            if (!output.value.trim()) {
+                alert(window.minifyAlerts.noOutput);
+                return;
+            }
+            navigator.clipboard.writeText(output.value).then(function() {
+                alert(window.minifyAlerts.copied);
+            }, function(err) {
+                alert(window.minifyAlerts.copyError + err);
+            });
+        }
+
+        function downloadScript() {
+            const output = document.getElementById('minifyOutput');
+            if (!output.value.trim()) {
+                alert(window.minifyAlerts.noOutput);
+                return;
+            }
+            const blob = new Blob([output.value], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'script_processed.lua';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
